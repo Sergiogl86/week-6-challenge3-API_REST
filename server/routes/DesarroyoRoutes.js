@@ -11,6 +11,15 @@ router.get("/", async (req, res) => {
   res.json(technology);
 });
 
+router.get("/:name", async (req, res) => {
+  const nameTechnology = req.params.name;
+  debug(chalk.red(`Haciendo el buscando a /${nameTechnology}`));
+  const technology = await Desarroyo.findOne({
+    technology: nameTechnology,
+  });
+  res.json(technology);
+});
+
 router.post(
   "/",
   (req, res, next) => {
