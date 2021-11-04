@@ -1,12 +1,12 @@
 const express = require("express");
 const chalk = require("chalk");
-const debug = require("debug")("week6:Desarroyo");
-const Desarroyo = require("../../database/models/Desarroyo");
+const debug = require("debug")("week6:Produccion");
+const Produccion = require("../../database/models/Produccion");
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const technology = await Desarroyo.find();
+  const technology = await Produccion.find();
   debug(chalk.red("Haciendo el get a /"));
   res.json(technology);
 });
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 router.get("/:name", async (req, res) => {
   const nameTechnology = req.params.name;
   debug(chalk.red(`Haciendo el buscando a /${nameTechnology}`));
-  const technology = await Desarroyo.findOne({
+  const technology = await Produccion.findOne({
     technology: nameTechnology,
   });
   res.json(technology);
@@ -30,7 +30,7 @@ router.post(
     try {
       debug(chalk.red("Haciendo el post a /"));
       const technology = req.body;
-      const newtechnology = await Desarroyo.create(technology);
+      const newtechnology = await Produccion.create(technology);
       res.json(newtechnology);
     } catch (error) {
       error.code = 400;
@@ -51,7 +51,7 @@ router.put(
       debug(chalk.red("Haciendo el put a /"));
       const technology = req.body;
       debug(chalk.red(technology._id));
-      await Desarroyo.findByIdAndUpdate(technology._id, technology);
+      await Produccion.findByIdAndUpdate(technology._id, technology);
       res.json(technology);
     } catch (error) {
       error.code = 400;
@@ -72,7 +72,7 @@ router.delete(
       const nameTechnology = req.params.name;
       debug(chalk.red(`Haciendo el delete a /${nameTechnology}`));
       debug(chalk.red(nameTechnology));
-      const technology = await Desarroyo.deleteOne({
+      const technology = await Produccion.deleteOne({
         technology: nameTechnology,
       });
       res.json(technology);

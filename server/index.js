@@ -3,6 +3,7 @@ const debug = require("debug")("week6:server");
 const express = require("express");
 const morgan = require("morgan");
 const DesarroyoRoutes = require("./routes/DesarroyoRoutes");
+const ProduccionRoutes = require("./routes/ProduccionRoutes");
 const { notFoundErrorHandler, generalErrorHandler } = require("./error");
 
 const app = express();
@@ -20,15 +21,21 @@ const initializeServer = (port) => {
   });
 };
 
-app.use(morgan("dev"));
-app.use(express.json());
-app.use((req, res, next) => {
-  debug("Soy el segundo middleware");
-  next();
-});
-app.use("/Desarroyo", DesarroyoRoutes);
+const selectBD = (baseDatos, edit) => {
+  app.use(morgan("dev"));
+  app.use(express.json());
+  app.use((req, res, next) => {
+    debug("Soy el segundo middleware");
+    next();
+  });
+  if (baseDatos === "desarroyos") {
+    app.use("/SkyLab", DesarroyoRoutes);
+  } else if (baseDatos === "produccion") {
+    app.use("/SkyLab", ProduccionRoutes);
+  }
 
-app.use(notFoundErrorHandler);
-app.use(generalErrorHandler);
+  app.use(notFoundErrorHandler);
+  app.use(generalErrorHandler);
+};
 
-module.exports = initializeServer;
+module.exports = { initializeServer, selectBD };
