@@ -28,10 +28,34 @@ router.post(
   },
   async (req, res, next) => {
     try {
-      debug(chalk.red("Haciendo el post a /nuevo"));
+      debug(chalk.red("Haciendo el post a /"));
       const technology = req.body;
       const newtechnology = await Desarroyo.create(technology);
       res.json(newtechnology);
+    } catch (error) {
+      error.code = 400;
+      error.message = "Datos erroneos!";
+      next(error);
+    }
+  }
+);
+
+router.put(
+  "/",
+  (req, res, next) => {
+    console.log("Creando una tecnologia!");
+    next();
+  },
+  async (req, res, next) => {
+    try {
+      debug(chalk.red("Haciendo el put a /"));
+      const technology = req.body;
+      debug(chalk.red(technology._id));
+      const newtechnology = await Desarroyo.findByIdAndUpdate(
+        technology._id,
+        technology
+      );
+      res.json(technology);
     } catch (error) {
       error.code = 400;
       error.message = "Datos erroneos!";
