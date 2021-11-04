@@ -11,4 +11,23 @@ router.get("/", async (req, res) => {
   res.json(technology);
 });
 
+router.post(
+  "/nuevo",
+  (req, res, next) => {
+    console.log("Creando una tecnologia!");
+    next();
+  },
+  async (req, res, next) => {
+    try {
+      const technology = req.body;
+      const newtechnology = await Desarroyo.create(technology);
+      res.json(newtechnology);
+    } catch (error) {
+      error.code = 400;
+      error.message = "Datos erroneos!";
+      next(error);
+    }
+  }
+);
+
 module.exports = router;
