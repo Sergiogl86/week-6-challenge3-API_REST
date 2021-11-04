@@ -12,16 +12,40 @@ router.get("/", async (req, res) => {
 });
 
 router.post(
-  "/nuevo",
+  "/",
   (req, res, next) => {
     console.log("Creando una tecnologia!");
     next();
   },
   async (req, res, next) => {
     try {
+      debug(chalk.red("Haciendo el post a /nuevo"));
       const technology = req.body;
       const newtechnology = await Desarroyo.create(technology);
       res.json(newtechnology);
+    } catch (error) {
+      error.code = 400;
+      error.message = "Datos erroneos!";
+      next(error);
+    }
+  }
+);
+
+router.delete(
+  "/:name",
+  (req, res, next) => {
+    console.log("Borrando una tecnologia!");
+    next();
+  },
+  async (req, res, next) => {
+    try {
+      const nameTechnology = req.params.name;
+      debug(chalk.red(`Haciendo el delete a /${nameTechnology}`));
+      debug(chalk.red(nameTechnology));
+      const technology = await Desarroyo.deleteOne({
+        technology: nameTechnology,
+      });
+      res.json(technology);
     } catch (error) {
       error.code = 400;
       error.message = "Datos erroneos!";

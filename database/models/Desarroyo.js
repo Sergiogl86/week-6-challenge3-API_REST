@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const petSchema = new Schema({
+const DesarroyoSchema = new Schema({
   technology: {
     type: String,
     required: true,
@@ -12,6 +12,6 @@ const petSchema = new Schema({
   },
 });
 
-const Desarroyo = model("Desarroyo", petSchema, "Desarroyo");
+const Desarroyo = model("Desarroyo", DesarroyoSchema, "Desarroyo");
 
 module.exports = Desarroyo;
