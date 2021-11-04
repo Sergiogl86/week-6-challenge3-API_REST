@@ -1,0 +1,35 @@
+{
+  "name": "week-6-challenge3-api_rest",
+  "version": "1.0.0",
+  "description": "Crea una API REST que se conecte a una base de datos en MongoDB, para manipular recursos de tipo _cosas que ya sé_. La base de datos tendrá una sola colección, donde almacenará documentos que representarán cosas que hemos aprendido en el bootcamp. Duplica la base de datos para que una sea la de pruebas y otra la de producción.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "start-dev": "nodemon -q ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergiogl86/week-6-challenge3-API_REST.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sergiogl86/week-6-challenge3-API_REST/issues"
+  },
+  "homepage": "https://github.com/Sergiogl86/week-6-challenge3-API_REST#readme",
+  "devDependencies": {
+    "chalk": "^4.1.2",
+    "debug": "^4.3.2",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "inquirer": "^8.2.0",
+    "nodemon": "^2.0.14"
+  }
+}
