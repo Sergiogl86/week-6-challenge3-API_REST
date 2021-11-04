@@ -1,4 +1,4 @@
-const debug = require("debug")("pets:database");
+const debug = require("debug")("week6:database");
 
 const chalk = require("chalk");
 const mongoose = require("mongoose");
