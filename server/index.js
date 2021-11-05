@@ -2,8 +2,8 @@ const chalk = require("chalk");
 const debug = require("debug")("week6:server");
 const express = require("express");
 const morgan = require("morgan");
-const DesarroyoRoutes = require("./routes/DesarroyoRoutes");
-const ProduccionRoutes = require("./routes/ProduccionRoutes");
+const { DesarroyoServer } = require("./routes/DesarroyoRoutes");
+const { ProduccionServer } = require("./routes/ProduccionRoutes");
 const { notFoundErrorHandler, generalErrorHandler } = require("./error");
 
 const app = express();
@@ -29,9 +29,9 @@ const selectBD = (baseDatos, edit) => {
     next();
   });
   if (baseDatos === "desarroyos") {
-    app.use("/SkyLab", DesarroyoRoutes);
+    DesarroyoServer(edit, app);
   } else if (baseDatos === "produccion") {
-    app.use("/SkyLab", ProduccionRoutes);
+    ProduccionServer(edit, app);
   }
 
   app.use(notFoundErrorHandler);
